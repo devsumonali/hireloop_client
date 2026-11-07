@@ -2,6 +2,7 @@
 
 import { signIn } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 const LoginPage = () => {
      const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -105,9 +106,12 @@ const LoginPage = () => {
 
                     <p className="mt-5 text-center text-xs text-white/50">
                          Don&apos;t have an account?{' '}
-                         <a href="#" className="font-semibold text-indigo-300 hover:underline">
+                         <Link
+                                   href="/registration"
+                              className="font-semibold text-indigo-300 hover:underline"
+                         >
                               Register
-                         </a>
+                         </Link>
                     </p>
                </div>
           </main>
