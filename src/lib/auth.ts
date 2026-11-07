@@ -18,8 +18,8 @@ export const auth = betterAuth({
                     input: true,
                },
                role: {
-                    type: ['seeker', 'recruiter', 'admin'],
-                    input: false,
+                    type: ['seeker', 'recruiter'],
+                    input: true,
                     defaultValue: 'seeker',
                },
           },
