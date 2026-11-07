@@ -3,11 +3,14 @@
 import { signUp } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const RegistrationPage = () => {
+     const router = useRouter();
      const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
-          const formData = new FormData(e.currentTarget);
+          const form = e.currentTarget;
+          const formData = new FormData(form);
 
           const fullName = formData.get('fullName') as string;
           const email = formData.get('email') as string;
@@ -35,14 +38,15 @@ const RegistrationPage = () => {
                toast.error(error.message || 'Sign up failed! Please try again.');
           } else {
                toast.success('User registration successfull');
+               router.refresh();
+               form.reset();
+               router.push('/');
           }
-
-          console.log(resData);
      };
 
      return (
           <main className="relative isolate flex flex-1 items-center justify-center overflow-hidden bg-[#050507] bg-[radial-gradient(ellipse_at_50%_35%,rgba(79,70,229,0.15),transparent_60%)] px-4 py-10 text-white">
-               <div className="relative w-full max-w-102.5 overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0f]/95 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.65)] ring-1 ring-indigo-400/10 before:absolute before:left-1/2 before:top-0 before:h-px before:w-2/3 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-indigo-400 before:to-transparent sm:p-6">
+               <div className="relative w-full max-w-140 overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0f]/95 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.65)] ring-1 ring-indigo-400/10 before:absolute before:left-1/2 before:top-0 before:h-px before:w-2/3 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-indigo-400 before:to-transparent sm:p-6">
                     <div className="mb-4 text-center">
                          <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-lg border border-indigo-400/20 bg-indigo-500/10 text-indigo-300 shadow-[0_0_20px_rgba(99,80,255,0.15)]">
                               <svg
@@ -61,7 +65,7 @@ const RegistrationPage = () => {
                          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
                               Create your account
                          </h2>
-                         <p className="mt-1 text-xs leading-5 text-white/50">
+                         <p className="mt-1 text-base leading-5 text-white/50">
                               Three minutes to set up. Matches start arriving today.
                          </p>
                     </div>
@@ -74,7 +78,7 @@ const RegistrationPage = () => {
                          <div>
                               <label
                                    htmlFor="fullName"
-                                   className="mb-1.5 block text-xs font-medium text-white/75"
+                                   className="mb-1.5 block text-base font-medium text-white/75"
                               >
                                    Full Name
                               </label>
@@ -83,7 +87,7 @@ const RegistrationPage = () => {
                                    id="fullName"
                                    name="fullName"
                                    placeholder="John Doe"
-                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-xs text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
+                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-base text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
                               />
                          </div>
 
@@ -91,7 +95,7 @@ const RegistrationPage = () => {
                          <div>
                               <label
                                    htmlFor="email"
-                                   className="mb-1.5 block text-xs font-medium text-white/75"
+                                   className="mb-1.5 block text-base font-medium text-white/75"
                               >
                                    Email Address
                               </label>
@@ -100,7 +104,7 @@ const RegistrationPage = () => {
                                    id="email"
                                    name="email"
                                    placeholder="you@example.com"
-                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-xs text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
+                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-base text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
                               />
                          </div>
 
@@ -108,7 +112,7 @@ const RegistrationPage = () => {
                          <div className="sm:col-span-2">
                               <label
                                    htmlFor="phone"
-                                   className="mb-1.5 block text-xs font-medium text-white/75"
+                                   className="mb-1.5 block text-base font-medium text-white/75"
                               >
                                    Phone Number
                               </label>
@@ -117,13 +121,13 @@ const RegistrationPage = () => {
                                    id="phone"
                                    name="phone"
                                    placeholder="+8801XXXXXXXXX"
-                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-xs text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
+                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-base text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
                               />
                          </div>
 
                          {/* Account Type */}
                          <fieldset className="order-first sm:col-span-2">
-                              <legend className="mb-1 block text-[11px] font-medium tracking-wide text-white/60">
+                              <legend className="mb-1 block text-base font-medium tracking-wide text-white/60">
                                    Joining HireLoop as
                               </legend>
                               <div className="grid grid-cols-2 gap-2">
@@ -150,7 +154,7 @@ const RegistrationPage = () => {
                                                        <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
                                                   </svg>
                                              </span>
-                                             <span className="min-w-0 text-xs font-semibold text-white">
+                                             <span className="min-w-0 text-base font-semibold text-white">
                                                   Job seeker
                                              </span>
                                              <span className="sr-only">
@@ -165,7 +169,7 @@ const RegistrationPage = () => {
                                              value="recruiter"
                                              className="peer sr-only"
                                         />
-                                             <span className="flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl border border-white/10 bg-[#15151a] px-2 py-1.5 text-center transition duration-200 hover:border-indigo-400/50 hover:bg-[#191820] peer-checked:border-indigo-300/80 peer-checked:bg-linear-to-br peer-checked:from-indigo-500/15 peer-checked:to-violet-500/5 peer-checked:shadow-[0_0_18px_rgba(99,80,255,0.12)] peer-checked:ring-1 peer-checked:ring-indigo-400/60 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-indigo-400">
+                                        <span className="flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl border border-white/10 bg-[#15151a] px-2 py-1.5 text-center transition duration-200 hover:border-indigo-400/50 hover:bg-[#191820] peer-checked:border-indigo-300/80 peer-checked:bg-linear-to-br peer-checked:from-indigo-500/15 peer-checked:to-violet-500/5 peer-checked:shadow-[0_0_18px_rgba(99,80,255,0.12)] peer-checked:ring-1 peer-checked:ring-indigo-400/60 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-indigo-400">
                                              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-white/6 text-indigo-200">
                                                   <svg
                                                        aria-hidden="true"
@@ -185,7 +189,7 @@ const RegistrationPage = () => {
                                                        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18m-11 0v2h4v-2" />
                                                   </svg>
                                              </span>
-                                             <span className="min-w-0 text-xs font-semibold text-white">
+                                             <span className="min-w-0 text-base font-semibold text-white">
                                                   Recruiter
                                              </span>
                                              <span className="sr-only">I’m hiring for my team</span>
@@ -198,7 +202,7 @@ const RegistrationPage = () => {
                          <div>
                               <label
                                    htmlFor="password"
-                                   className="mb-1.5 block text-xs font-medium text-white/75"
+                                   className="mb-1.5 block text-base font-medium text-white/75"
                               >
                                    Password
                               </label>
@@ -207,7 +211,7 @@ const RegistrationPage = () => {
                                    id="password"
                                    name="password"
                                    placeholder="••••••••"
-                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-xs text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
+                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-base text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
                               />
                          </div>
 
@@ -215,7 +219,7 @@ const RegistrationPage = () => {
                          <div>
                               <label
                                    htmlFor="confirmPassword"
-                                   className="mb-1.5 block text-xs font-medium text-white/75"
+                                   className="mb-1.5 block text-base font-medium text-white/75"
                               >
                                    Confirm Password
                               </label>
@@ -224,7 +228,7 @@ const RegistrationPage = () => {
                                    id="confirmPassword"
                                    name="confirmPassword"
                                    placeholder="••••••••"
-                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-xs text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
+                                   className="w-full rounded-lg border border-white/10 bg-[#15151a] px-3 py-2.5 text-base text-white placeholder-white/30 outline-none transition duration-200 hover:border-white/20 focus:border-indigo-400 focus:bg-[#18171f] focus:ring-4 focus:ring-indigo-500/10"
                               />
                          </div>
 
@@ -238,7 +242,7 @@ const RegistrationPage = () => {
                               />
                               <label
                                    htmlFor="terms"
-                                   className="cursor-pointer select-none text-xs text-white/60"
+                                   className="cursor-pointer select-none text-base text-white/60"
                               >
                                    I agree to the{' '}
                                    <a
@@ -253,13 +257,13 @@ const RegistrationPage = () => {
                          {/* Submit Button */}
                          <button
                               type="submit"
-                              className="w-full rounded-lg border border-indigo-300/70 bg-linear-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_22px_rgba(99,80,255,0.24)] transition duration-200 hover:-translate-y-0.5 hover:from-indigo-500 hover:to-violet-500 focus:outline-none focus:ring-4 focus:ring-indigo-400/25 sm:col-span-2"
+                              className="w-full rounded-lg border border-indigo-300/70 bg-linear-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-base font-semibold text-white shadow-[0_6px_22px_rgba(99,80,255,0.24)] transition duration-200 hover:-translate-y-0.5 hover:from-indigo-500 hover:to-violet-500 focus:outline-none focus:ring-4 focus:ring-indigo-400/25 sm:col-span-2"
                          >
                               Sign Up
                          </button>
                     </form>
 
-                    <p className="mt-4 text-center text-xs text-white/50">
+                    <p className="mt-4 text-center text-base text-white/50">
                          Already have an account?{' '}
                          <Link
                               href="/login"

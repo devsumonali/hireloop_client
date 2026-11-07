@@ -11,7 +11,7 @@ const Hero = () => {
      return (
           <main className="relative flex-1 overflow-hidden bg-[#050507] text-white">
                <section className="relative z-10 mx-auto max-w-6xl px-4 pb-0 pt-20 text-center sm:px-6 sm:pt-24">
-                    <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#111114]/90 px-4 py-2 font-mono text-[11px] tracking-wide text-white/65 shadow-[0_8px_28px_rgba(0,0,0,0.35)]">
+                    <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#111114]/90 px-4 py-2 font-mono text-base tracking-wide text-white/65 shadow-[0_8px_28px_rgba(0,0,0,0.35)]">
                          <span aria-hidden="true">✦</span>
                          <strong className="text-white">50,000+</strong>
                          <span>NEW JOBS THIS MONTH</span>
@@ -20,13 +20,13 @@ const Hero = () => {
                     <h1 className="mt-6 text-3xl font-semibold tracking-tight sm:text-5xl">
                          Find Your Dream Job Today
                     </h1>
-                    <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-white/60 sm:text-base">
+                    <p className="mx-auto mt-3 max-w-2xl text-base leading-6 text-white/60 sm:text-base">
                          HireLoop connects top talent with world-class companies. Browse thousands of
                          curated opportunities and land your next role — faster.
                     </p>
 
                     <div className="mx-auto mt-7 flex max-w-2xl flex-col gap-2 rounded-xl border border-white/15 bg-[#111114]/90 p-2 text-left shadow-lg sm:flex-row sm:items-center">
-                         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-xs text-white/55">
+                         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-base text-white/55">
                               <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.6">
                                    <circle cx="11" cy="11" r="7" />
                                    <path d="m16 16 4 4" />
@@ -34,7 +34,7 @@ const Hero = () => {
                               Job title, skill or company
                          </div>
                          <div className="hidden h-6 w-px bg-white/15 sm:block" />
-                         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-xs text-white/55">
+                         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-base text-white/55">
                               <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.6">
                                    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
                                    <circle cx="12" cy="10" r="2.5" />
@@ -49,7 +49,7 @@ const Hero = () => {
                          </span>
                     </div>
 
-                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-[11px] text-white/55">
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-base text-white/55">
                          <span className="mr-1">Trending Position</span>
                          {['Product Designer', 'AI Engineering', 'Dev-ops Engineer'].map((item) => (
                               <span key={item} className="rounded-full border border-white/10 bg-white/6 px-2.5 py-1 text-white/80">
@@ -77,9 +77,9 @@ const Hero = () => {
                     <div className="relative z-10 mx-auto mt-7 grid max-w-5xl grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-4 sm:gap-4">
                          {stats.map((stat) => (
                               <div key={stat.label} className="min-h-32 rounded-xl border border-white/10 bg-[#08080a]/95 p-4 text-left shadow-[0_14px_45px_rgba(0,0,0,0.35)] sm:min-h-36 sm:p-5">
-                                   <span aria-hidden="true" className="text-sm text-white/90">{stat.icon}</span>
+                                   <span aria-hidden="true" className="text-base text-white/90">{stat.icon}</span>
                                    <p className="mt-5 text-3xl font-semibold tracking-tight sm:mt-6 sm:text-4xl">{stat.value}</p>
-                                   <p className="mt-1 text-xs text-white/75">{stat.label}</p>
+                                   <p className="mt-1 text-base text-white/75">{stat.label}</p>
                               </div>
                          ))}
                     </div>
