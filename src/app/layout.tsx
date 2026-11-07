@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/shared/Navbar';
 import Footer from '@/components/shared/Footer';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
      title: 'Create Next App',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                <body className="min-h-full flex flex-col">
                     <Navbar />
                     {children}
+                    <Toaster position="top-center" />
                     <Footer />
                </body>
           </html>

@@ -17,6 +17,11 @@ export const auth = betterAuth({
                     required: false,
                     input: true,
                },
+               role: {
+                    type: ['seeker', 'recruiter', 'admin'],
+                    input: false,
+                    defaultValue: 'seeker',
+               },
           },
      },
      database: mongodbAdapter(db, {

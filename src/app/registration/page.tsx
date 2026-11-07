@@ -1,6 +1,7 @@
 'use client';
 
 import { signUp } from '@/lib/auth-client';
+import toast from 'react-hot-toast';
 
 const RegistrationPage = () => {
      const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,7 +15,7 @@ const RegistrationPage = () => {
           const phone = formData.get('phone') as string;
 
           if (password !== confirmPassword) {
-               console.error('Passwords do not match');
+               toast.error('Passwords do not match');
                return;
           }
 
@@ -28,12 +29,10 @@ const RegistrationPage = () => {
           });
 
           if (error) {
-               console.error('Sign up failed:', error);
+               toast.error(error.message || 'Sign up failed! Please try again.');
           } else {
-               console.log('User registered successfully:', resData);
+               toast.success('User registration successfull');
           }
-
-          console.log(error, resData);
      };
 
      return (
