@@ -3,10 +3,11 @@
 import { useSession, signOut } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Navbar = () => {
      const { data: session } = useSession();
+     const router = useRouter();
 
      const pathname = usePathname();
      const isLoginPage = pathname === '/login';
@@ -14,6 +15,8 @@ const Navbar = () => {
 
      const handleSignOut = async () => {
           await signOut();
+          router.replace('/login');
+          router.refresh();
      };
 
      return (

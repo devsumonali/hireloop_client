@@ -37,7 +37,7 @@ const RegistrationPage = () => {
           if (error) {
                toast.error(error.message || 'Sign up failed! Please try again.');
           } else {
-               toast.success('User registration successfull');
+               toast.success('User registration successfull' + resData.user.name);
                router.refresh();
                form.reset();
                router.push('/');

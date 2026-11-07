@@ -24,7 +24,7 @@ const LoginPage = () => {
           if (error) {
                toast.error(error.message || ' Sign in Failed! Please try again');
           } else {
-               toast.success('User Login successfully');
+               toast.success('User Login successfully ' + ' ' + resData.user.name);
                router.refresh();
                form.reset();
                router.push('/');
