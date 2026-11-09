@@ -130,7 +130,7 @@ const RegistrationPage = () => {
                               <legend className="mb-1 block text-base font-medium tracking-wide text-white/60">
                                    Joining HireLoop as
                               </legend>
-                              <div className="grid grid-cols-2 gap-2">
+                              <div className="grid grid-cols-3 gap-2">
                                    <label className="cursor-pointer">
                                         <input
                                              type="radio"
@@ -193,6 +193,36 @@ const RegistrationPage = () => {
                                                   Recruiter
                                              </span>
                                              <span className="sr-only">I’m hiring for my team</span>
+                                        </span>
+                                   </label>
+                                   <label className="cursor-pointer">
+                                        <input
+                                             type="radio"
+                                             name="role"
+                                             value="admin"
+                                             required
+                                             className="peer sr-only"
+                                        />
+                                        <span className="flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl border border-white/10 bg-[#15151a] px-2 py-1.5 text-center transition duration-200 hover:border-indigo-400/50 hover:bg-[#191820] peer-checked:border-indigo-300/80 peer-checked:bg-linear-to-br peer-checked:from-indigo-500/15 peer-checked:to-violet-500/5 peer-checked:shadow-[0_0_18px_rgba(99,80,255,0.12)] peer-checked:ring-1 peer-checked:ring-indigo-400/60 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-indigo-400">
+                                             <span className="flex h-5 w-5 items-center justify-center rounded-md bg-white/6 text-indigo-200">
+                                                  <svg
+                                                       aria-hidden="true"
+                                                       viewBox="0 0 24 24"
+                                                       className="h-3 w-3"
+                                                       fill="none"
+                                                       stroke="currentColor"
+                                                       strokeWidth="1.6"
+                                                  >
+                                                       <circle cx="12" cy="8" r="4" />
+                                                       <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+                                                  </svg>
+                                             </span>
+                                             <span className="min-w-0 text-base font-semibold text-white">
+                                                  Admin
+                                             </span>
+                                             <span className="sr-only">
+                                                  I’m looking for manage all
+                                             </span>
                                         </span>
                                    </label>
                               </div>
