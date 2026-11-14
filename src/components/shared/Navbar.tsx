@@ -23,7 +23,7 @@ const Navbar = () => {
 
     return (
         <header className="relative z-20 border-b border-white/10 bg-[#09090d] text-white">
-            <div className="mx-auto flex min-h-17 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+            <div className="mx-auto flex min-h-17 max-w-6xl flex-wrap items-center justify-between gap-x-2 gap-y-3 px-4 py-3 sm:px-6 md:flex-nowrap md:gap-3 md:py-0">
                 <Link href="/" aria-label="HireLoop home" className="shrink-0">
                     <Image
                         src="/images/logo.png"
@@ -31,11 +31,11 @@ const Navbar = () => {
                         width={154}
                         height={44}
                         priority
-                        className="h-auto w-28 sm:w-33"
+                        className="h-auto w-24 sm:w-33"
                     />
                 </Link>
 
-                <nav className="hidden items-center gap-7 text-base text-white/75 md:flex">
+                <nav className="order-last flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/75 sm:text-base md:order-none md:w-auto md:gap-7">
                     <Link href="/" className="transition hover:text-white">
                         Browse Jobs
                     </Link>
@@ -43,7 +43,7 @@ const Navbar = () => {
                     <span>Pricing</span>
                 </nav>
 
-                <div className="flex items-center gap-2 sm:gap-4">
+                <div className="flex shrink-0 items-center gap-2 whitespace-nowrap sm:gap-4">
                     {session?.user ? (
                         <>
                             <Link
@@ -55,7 +55,7 @@ const Navbar = () => {
 
                             <button
                                 onClick={handleSignOut}
-                                className="rounded-lg border cursor-pointer border-indigo-400/70 px-3 py-2 text-base font-medium shadow-[0_0_18px_rgba(99,80,255,0.2)] transition hover:bg-indigo-500 sm:px-4"
+                                className="rounded-lg border cursor-pointer border-indigo-400/70 px-3 py-2 text-sm font-medium shadow-[0_0_18px_rgba(99,80,255,0.2)] transition hover:bg-indigo-500 sm:px-4 sm:text-base"
                             >
                                 Sign Out
                             </button>
@@ -65,14 +65,14 @@ const Navbar = () => {
                             <Link
                                 href="/login"
                                 aria-current={isLoginPage ? 'page' : undefined}
-                                className={`rounded-md px-2 py-2 text-base transition hover:text-white sm:px-3 ${isLoginPage ? 'text-white' : 'text-indigo-300'}`}
+                                className={`rounded-md px-2 py-2 text-sm transition hover:text-white sm:px-3 sm:text-base ${isLoginPage ? 'text-white' : 'text-indigo-300'}`}
                             >
                                 Sign In
                             </Link>
                             <Link
                                 href="/registration"
                                 aria-current={isRegistrationPage ? 'page' : undefined}
-                                className={`rounded-lg border border-indigo-400/70 px-3 py-2 text-base font-medium shadow-[0_0_18px_rgba(99,80,255,0.2)] transition hover:bg-indigo-500 sm:px-4 ${isRegistrationPage ? 'bg-indigo-500' : 'bg-indigo-600'}`}
+                                className={`rounded-lg border border-indigo-400/70 px-3 py-2 text-sm font-medium shadow-[0_0_18px_rgba(99,80,255,0.2)] transition hover:bg-indigo-500 sm:px-4 sm:text-base ${isRegistrationPage ? 'bg-indigo-500' : 'bg-indigo-600'}`}
                             >
                                 Get Started
                             </Link>

@@ -11,6 +11,7 @@ import {
     FiGrid,
     FiSettings,
     FiUsers,
+    FiPlusCircle,
 } from 'react-icons/fi';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { useSession } from '@/lib/auth-client';
@@ -32,35 +33,36 @@ const menuItems = {
     ],
     seeker: [
         { id: 'dashboard', name: 'Dashboard', icon: FiGrid, url: '/dashboard/seeker' },
-        {
-            id: 'applications',
-            name: 'My applications',
-            icon: FiBriefcase,
-            url: '/dashboard/seeker/applications',
-        },
+        { id: 'jobs', name: 'Jobs', icon: FiBriefcase, url: '/dashboard/seeker/jobs' },
         {
             id: 'saved-jobs',
-            name: 'Saved jobs',
+            name: 'Saved Jobs',
             icon: FiBookmark,
             url: '/dashboard/seeker/saved-jobs',
         },
-        { id: 'resume', name: 'My resume', icon: FiFileText, url: '/dashboard/seeker/resume' },
+        {
+            id: 'applications',
+            name: 'Applications',
+            icon: FiFileText,
+            url: '/dashboard/seeker/applications',
+        },
+        { id: 'billing', name: 'Billing', icon: FiDollarSign, url: '/dashboard/seeker/billing' },
         { id: 'settings', name: 'Settings', icon: FiSettings, url: '/dashboard/seeker/settings' },
     ],
     recruiter: [
         { id: 'dashboard', name: 'Dashboard', icon: FiGrid, url: '/dashboard/recruiter' },
-        { id: 'jobs', name: 'Jobs', icon: FiBriefcase, url: '/dashboard/recruiter/jobs' },
         {
-            id: 'candidates',
-            name: 'Candidates',
-            icon: FiUsers,
-            url: '/dashboard/recruiter/candidates',
+            id: 'manage-jobs',
+            name: 'Manage Jobs',
+            icon: FiBriefcase,
+            url: '/dashboard/recruiter/manage-jobs',
         },
+        { id: 'add-job', name: 'Add Job', icon: FiPlusCircle, url: '/dashboard/recruiter/add-job' },
         {
-            id: 'company',
-            name: 'Company',
-            icon: HiOutlineOfficeBuilding,
-            url: '/dashboard/recruiter/company',
+            id: 'applications',
+            name: 'Applications',
+            icon: FiFileText,
+            url: '/dashboard/recruiter/applications',
         },
         {
             id: 'settings',
@@ -82,8 +84,8 @@ export default function DashboardSidebar() {
     const menus = menuItems[role];
 
     return (
-        <aside className="sticky top-0 flex h-dvh w-70 shrink-0 flex-col overflow-y-auto border-r border-white/5 bg-[#09090b] text-white">
-            <div className="shrink-0 px-5 pt-6 pb-4">
+        <aside className="flex w-full min-w-0 shrink-0 flex-col border-b border-white/5 bg-[#09090b] text-white lg:sticky lg:top-0 lg:h-dvh lg:w-60 lg:overflow-y-auto lg:border-r lg:border-b-0 xl:w-70">
+            <div className="shrink-0 px-4 pt-4 pb-3 sm:px-6 lg:px-5 lg:pt-6 lg:pb-4">
                 <Link
                     href="/"
                     aria-label="HireLoop home"
@@ -103,7 +105,7 @@ export default function DashboardSidebar() {
                 </p>
             </div>
 
-            <nav aria-label="Dashboard navigation" className="flex-1 space-y-0.5 px-2.5">
+            <nav aria-label="Dashboard navigation" className="flex min-w-0 flex-wrap gap-1 px-3 sm:px-5 lg:block lg:flex-1 lg:space-y-0.5 lg:px-2.5">
                 {menus.map(({ id, name, icon: Icon, url }) => {
                     const isActive =
                         pathname === url || (id === 'dashboard' && pathname === '/dashboard');
@@ -114,7 +116,7 @@ export default function DashboardSidebar() {
                             href={url}
                             prefetch={false}
                             aria-current={isActive ? 'page' : undefined}
-                            className={`relative flex h-8 items-center gap-2 rounded-md px-2 text-md focus-visible:outline-2 focus-visible:outline-violet-400 ${isActive ? 'border border-white/5 bg-[#232327] font-medium text-white' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}
+                            className={`relative flex min-h-10 items-center gap-2 rounded-md px-2 text-sm lg:min-h-8 lg:text-base focus-visible:outline-2 focus-visible:outline-violet-400 ${isActive ? 'border border-white/5 bg-[#232327] font-medium text-white' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}
                         >
                             {isActive && (
                                 <span
@@ -129,7 +131,7 @@ export default function DashboardSidebar() {
                 })}
             </nav>
 
-            <div className="mx-2.5 mt-6 mb-3 flex shrink-0 items-center gap-2.5 rounded-lg border border-white/10 bg-[#141416] p-2.5">
+            <div className="mx-4 mt-3 mb-4 flex min-w-0 shrink-0 items-center gap-2.5 rounded-lg border border-white/10 bg-[#141416] p-2.5 sm:mx-6 lg:mx-2.5 lg:mt-6 lg:mb-3">
                 {user?.image ? (
                     <Image
                         src={user.image}
@@ -144,7 +146,7 @@ export default function DashboardSidebar() {
                         {user?.name.charAt(0).toUpperCase() || 'U'}
                     </span>
                 )}
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                     <p className="truncate text-md font-medium">
                         {isPending ? 'Loading…' : user?.name || 'Guest'}
                     </p>

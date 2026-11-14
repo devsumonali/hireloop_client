@@ -31,8 +31,8 @@ const LoginPage = () => {
           }
      };
      return (
-          <main className="relative isolate flex flex-1 items-center justify-center overflow-hidden bg-[#050507] bg-[radial-gradient(ellipse_at_50%_35%,rgba(79,70,229,0.15),transparent_60%)] px-4 py-10 text-white">
-               <div className="relative w-full max-w-120 rounded-2xl border border-white/10 bg-[#0b0b0f]/95 p-5 shadow-[0_24px_90px_rgba(0,0,0,0.65)] ring-1 ring-indigo-400/10 sm:p-6">
+          <main className="relative isolate flex min-w-0 flex-1 items-center justify-center bg-[#050507] bg-[radial-gradient(ellipse_at_50%_35%,rgba(79,70,229,0.15),transparent_60%)] px-4 py-6 text-white sm:py-10">
+               <div className="relative w-full min-w-0 max-w-120 rounded-2xl border border-white/10 bg-[#0b0b0f]/95 p-4 shadow-[0_24px_90px_rgba(0,0,0,0.65)] ring-1 ring-indigo-400/10 sm:p-6">
                     <div className="mb-6 text-center">
                          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
                               Welcome back
@@ -78,7 +78,7 @@ const LoginPage = () => {
                          </div>
 
                          {/* Remember Me & Forgot Password */}
-                         <div className="mb-5 flex items-center justify-between">
+                         <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
                               <div className="flex items-center gap-2">
                                    <input
                                         type="checkbox"

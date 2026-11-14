@@ -45,8 +45,8 @@ const RegistrationPage = () => {
      };
 
      return (
-          <main className="relative isolate flex flex-1 items-center justify-center overflow-hidden bg-[#050507] bg-[radial-gradient(ellipse_at_50%_35%,rgba(79,70,229,0.15),transparent_60%)] px-4 py-10 text-white">
-               <div className="relative w-full max-w-140 overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0f]/95 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.65)] ring-1 ring-indigo-400/10 before:absolute before:left-1/2 before:top-0 before:h-px before:w-2/3 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-indigo-400 before:to-transparent sm:p-6">
+          <main className="relative isolate flex min-w-0 flex-1 items-center justify-center bg-[#050507] bg-[radial-gradient(ellipse_at_50%_35%,rgba(79,70,229,0.15),transparent_60%)] px-4 py-6 text-white sm:py-10">
+               <div className="relative w-full min-w-0 max-w-140 overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0f]/95 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.65)] ring-1 ring-indigo-400/10 before:absolute before:left-1/2 before:top-0 before:h-px before:w-2/3 before:-translate-x-1/2 before:bg-linear-to-r before:from-transparent before:via-indigo-400 before:to-transparent sm:p-6">
                     <div className="mb-4 text-center">
                          <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-lg border border-indigo-400/20 bg-indigo-500/10 text-indigo-300 shadow-[0_0_20px_rgba(99,80,255,0.15)]">
                               <svg
@@ -126,11 +126,11 @@ const RegistrationPage = () => {
                          </div>
 
                          {/* Account Type */}
-                         <fieldset className="order-first sm:col-span-2">
+                         <fieldset className="order-first min-w-0 sm:col-span-2">
                               <legend className="mb-1 block text-base font-medium tracking-wide text-white/60">
                                    Joining HireLoop as
                               </legend>
-                              <div className="grid grid-cols-3 gap-2">
+                              <div className="grid grid-cols-1 gap-2 min-[360px]:grid-cols-3">
                                    <label className="cursor-pointer">
                                         <input
                                              type="radio"
@@ -263,12 +263,12 @@ const RegistrationPage = () => {
                          </div>
 
                          {/* Terms & Conditions Checkbox */}
-                         <div className="flex items-center gap-2 sm:col-span-2">
+                         <div className="flex items-start gap-2 sm:col-span-2">
                               <input
                                    type="checkbox"
                                    id="terms"
                                    name="terms"
-                                   className="h-4 w-4 rounded border-white/20 bg-[#08080b] text-indigo-500 focus:ring-indigo-500"
+                                   className="mt-1 h-4 w-4 shrink-0 rounded border-white/20 bg-[#08080b] text-indigo-500 focus:ring-indigo-500"
                               />
                               <label
                                    htmlFor="terms"
