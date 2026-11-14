@@ -1,91 +1,130 @@
 import Image from 'next/image';
+import {
+    FiBarChart2,
+    FiBriefcase,
+    FiMapPin,
+    FiSearch,
+    FiStar,
+    FiUserCheck,
+    FiUsers,
+} from 'react-icons/fi';
 
 const stats = [
-     { icon: '▱', value: '50K', label: 'Active Jobs' },
-     { icon: '▥', value: '12K', label: 'Companies' },
-     { icon: '⌕', value: '2M', label: 'Job Seekers' },
-     { icon: '☆', value: '97%', label: 'Satisfaction Rate' },
+    { icon: FiUserCheck, value: '50K', label: 'Active Jobs' },
+    { icon: FiBarChart2, value: '12K', label: 'Companies' },
+    { icon: FiUsers, value: '2M', label: 'Job Seekers' },
+    { icon: FiStar, value: '97%', label: 'Satisfaction Rate' },
 ];
 
 const Hero = () => {
-     return (
-          <main className="relative flex-1 overflow-hidden bg-[#050507] text-white">
-               <section className="relative z-10 mx-auto max-w-6xl px-4 pb-0 pt-12 text-center sm:px-6 sm:pt-20 lg:pt-24">
-                    <div className="mx-auto inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-white/15 bg-[#111114]/90 px-3 py-2 font-mono text-xs tracking-wide text-white/65 shadow-[0_8px_28px_rgba(0,0,0,0.35)] sm:px-4 sm:text-sm lg:text-base">
-                         <span aria-hidden="true">✦</span>
-                         <strong className="text-white">50,000+</strong>
-                         <span>NEW JOBS THIS MONTH</span>
+    return (
+        <main className="relative isolate flex-1 overflow-hidden bg-black text-white font-[Arial,Helvetica,sans-serif] before:pointer-events-none before:absolute before:inset-0 before:-z-1 before:bg-[radial-gradient(ellipse_100%_540px_at_50%_0,#292929,transparent_85%)] before:content-['']">
+            <section className="relative z-1 mx-auto max-w-330 px-4 pt-48 text-center md:px-6 md:pt-52 lg:pt-69">
+                <div className="flex items-center justify-center before:hidden before:h-px before:w-16 before:bg-[linear-gradient(90deg,transparent,#fff2)] before:content-[''] after:hidden after:h-px after:w-16 after:rotate-180 after:bg-[linear-gradient(90deg,transparent,#fff2)] after:content-[''] md:before:block md:after:block">
+                    <div className="inline-flex min-h-9 max-w-full items-center justify-center gap-2 rounded-full border border-[#ffffff26] bg-[linear-gradient(#1b1b1b,#080808)] px-3 py-2 text-[11px] leading-4.5 tracking-normal text-[#999] shadow-[inset_0_1px_#ffffff0d,0_8px_24px_#0006] font-['Courier_New',monospace] md:min-h-11 md:gap-3 md:px-5.5 md:py-2.5 md:text-lg md:leading-5.5 md:tracking-[0.5px]">
+                        <FiBriefcase
+                            aria-hidden="true"
+                            className="size-4.5 shrink-0 text-[#ffac5c] md:size-5.5"
+                        />
+                        <strong className="shrink-0 font-bold text-white">50,000+</strong>
+                        <span>NEW JOBS THIS MONTH</span>
                     </div>
+                </div>
 
-                    <h1 className="mt-6 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-                         Find Your Dream Job Today
-                    </h1>
-                    <p className="mx-auto mt-3 max-w-2xl text-base leading-6 text-white/60 sm:text-base">
-                         HireLoop connects top talent with world-class companies. Browse thousands of
-                         curated opportunities and land your next role — faster.
-                    </p>
+                <h1 className="mt-7 text-[36px] leading-[1.16] font-semibold tracking-[-1.4px] text-balance md:mt-10 md:text-[44px] md:tracking-[-1.6px] lg:text-[56px] lg:tracking-[-2.3px]">
+                    Find Your Dream Job Today
+                </h1>
+                <p className="mx-auto mt-4 max-w-130 text-base leading-6.5 text-pretty text-[#999] md:max-w-175 md:text-lg md:leading-7 lg:max-w-190 lg:text-xl lg:leading-7.5">
+                    HireLoop connects top talent with world-class companies. Browse thousands of
+                    curated opportunities and land your next role — faster.
+                </p>
 
-                    <div className="mx-auto mt-7 flex max-w-2xl flex-col gap-2 rounded-xl border border-white/15 bg-[#111114]/90 p-2 text-left shadow-lg sm:flex-row sm:items-center">
-                         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-base text-white/55">
-                              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.6">
-                                   <circle cx="11" cy="11" r="7" />
-                                   <path d="m16 16 4 4" />
-                              </svg>
-                              Job title, skill or company
-                         </div>
-                         <div className="hidden h-6 w-px bg-white/15 sm:block" />
-                         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-base text-white/55">
-                              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.6">
-                                   <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
-                                   <circle cx="12" cy="10" r="2.5" />
-                              </svg>
-                              Location or Remote
-                         </div>
-                         <span aria-hidden="true" className="flex h-9 w-full shrink-0 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-[0_0_18px_rgba(99,80,255,0.35)] sm:w-9">
-                              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7">
-                                   <circle cx="11" cy="11" r="7" />
-                                   <path d="m16 16 4 4" />
-                              </svg>
-                         </span>
+                <div className="mx-auto mt-8 flex min-h-16 max-w-130 flex-col items-center gap-0 rounded-[14px] border border-[#ffffff30] bg-[#101010] p-2 text-left shadow-[inset_0_1px_#ffffff08,0_8px_24px_#0004] md:mt-12 md:max-w-196 md:flex-row md:gap-4 md:rounded-2xl">
+                    <div className="flex min-h-12 w-full min-w-0 flex-1 items-center gap-2.5 px-3 text-sm leading-6 text-[#aaa] md:min-h-auto md:w-auto md:pr-0 md:text-base">
+                        <FiSearch
+                            aria-hidden="true"
+                            className="size-5 shrink-0 stroke-[1.5px] text-[#ddd] md:size-6"
+                        />
+                        <span>Job title, skill or company</span>
                     </div>
-
-                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-white/55 sm:text-base">
-                         <span className="mr-1">Trending Position</span>
-                         {['Product Designer', 'AI Engineering', 'Dev-ops Engineer'].map((item) => (
-                              <span key={item} className="rounded-full border border-white/10 bg-white/6 px-2.5 py-1 text-white/80">
-                                   {item}
-                              </span>
-                         ))}
-                    </div>
-               </section>
-
-               <section aria-label="HireLoop community statistics" className="relative mx-auto mt-6 min-h-116.25 max-w-6xl px-4 pt-28 pb-8 sm:px-6 sm:pt-48 sm:pb-10">
-                    <Image
-                         src="/images/globe.png"
-                         alt=""
-                         width={1440}
-                         height={1882}
-                         priority
-                         className="pointer-events-none absolute left-1/2 -top-136 z-0 h-auto w-[min(1040px,145vw)] max-w-none -translate-x-1/2 opacity-90 sm:-top-148 sm:w-275"
+                    <div
+                        aria-hidden="true"
+                        className="h-px w-[calc(100%-24px)] shrink-0 bg-[#ffffff26] md:h-6 md:w-px"
                     />
-                    <p className="relative z-10 mx-auto max-w-2xl text-xl font-medium leading-8 tracking-tight text-indigo-50/90 sm:text-2xl sm:leading-9">
-                         Assisting over 15,000 job seekers
-                         <br />
-                         find their dream positions.
-                    </p>
-
-                    <div className="relative z-10 mx-auto mt-7 grid max-w-5xl grid-cols-2 gap-3 sm:mt-8 sm:gap-4 md:grid-cols-4">
-                         {stats.map((stat) => (
-                              <div key={stat.label} className="min-h-32 min-w-0 rounded-xl border border-white/10 bg-[#08080a]/95 p-4 text-left shadow-[0_14px_45px_rgba(0,0,0,0.35)] sm:min-h-36 sm:p-5">
-                                   <span aria-hidden="true" className="text-base text-white/90">{stat.icon}</span>
-                                   <p className="mt-5 text-3xl font-semibold tracking-tight sm:mt-6 sm:text-4xl">{stat.value}</p>
-                                   <p className="mt-1 text-sm text-white/75 lg:text-base">{stat.label}</p>
-                              </div>
-                         ))}
+                    <div className="flex min-h-12 w-full min-w-0 flex-1 items-center gap-2.5 px-3 text-sm leading-6 text-[#aaa] md:min-h-auto md:w-auto md:pr-0 md:text-base">
+                        <FiMapPin
+                            aria-hidden="true"
+                            className="size-5 shrink-0 stroke-[1.5px] text-[#ddd] md:size-6"
+                        />
+                        <span>Location or Remote</span>
                     </div>
-               </section>
-          </main>
-     );
+                    <span
+                        aria-hidden="true"
+                        className="mt-2 flex h-11 w-full shrink-0 items-center justify-center rounded-[9px] border border-[#b9adff] bg-[linear-gradient(135deg,#8371ff,#5740ff)] shadow-[inset_0_0_10px_#ffffff26,0_0_16px_#6251ff33] md:mt-0 md:size-12 md:rounded-xl"
+                    >
+                        <FiSearch className="size-6 stroke-[1.5px] md:size-7" />
+                    </span>
+                </div>
+
+                <div className="mx-auto mt-4.5 flex max-w-130 flex-wrap items-center justify-center gap-1.5 text-xs leading-4.5 text-[#999] md:mx-0 md:mt-6 md:max-w-none md:gap-2 md:text-sm md:leading-5">
+                    <span className="mb-0.5 w-full md:mr-2 md:mb-0 md:w-auto">
+                        Trending Position
+                    </span>
+                    {['Product Designer', 'AI Engineering', 'Dev-ops Engineer'].map((item) => (
+                        <span
+                            key={item}
+                            className="rounded-full border border-[#ffffff1a] bg-[#ffffff08] px-2.5 py-1 text-[#ddd] md:px-3"
+                        >
+                            {item}
+                        </span>
+                    ))}
+                </div>
+            </section>
+
+            <section
+                aria-label="HireLoop community statistics"
+                className="relative px-4 pt-45 pb-6 [--globe-width:864px] md:px-6 md:pt-70 md:pb-7 md:[--globe-width:clamp(1100px,100vw,1440px)] lg:pt-92"
+            >
+                <Image
+                    src="/images/globe.png"
+                    alt=""
+                    width={1440}
+                    height={1882}
+                    sizes="(max-width: 767px) 864px, (max-width: 1100px) 1100px, (max-width: 1440px) 100vw, 1440px"
+                    preload
+                    className="pointer-events-none absolute top-[calc(40px-var(--globe-width)*0.5875)] left-1/2 z-0 h-auto w-(--globe-width) max-w-none -translate-x-1/2 [clip-path:polygon(0_43%,12%_36%,32%_29%,50%_27%,68%_29%,88%_36%,100%_43%,100%_100%,0_100%)] mask-[linear-gradient(to_bottom,transparent_26%,#000_43%)] md:top-[calc(140px-var(--globe-width)*0.5875)] lg:top-[calc(184px-var(--globe-width)*0.5875)]"
+                />
+                <p className="relative z-1 mx-auto max-w-130 text-center text-[clamp(20px,5.6vw,26px)] leading-[1.4] font-normal tracking-[-0.8px] text-[#ddd9ff] md:max-w-196 md:text-[34px] md:leading-11 md:tracking-[-1.2px] lg:text-[40px] lg:leading-12.5">
+                    Assisting over{' '}
+                    <strong className="font-medium text-white">15,000 job seekers</strong>
+                    <br />
+                    find their dream positions.
+                </p>
+
+                <div className="relative z-1 mx-auto mt-8 grid max-w-130 grid-cols-2 gap-3 md:mt-12 md:max-w-330 md:grid-cols-4 md:gap-4 lg:gap-6">
+                    {stats.map(({ icon: Icon, value, label }) => (
+                        <div
+                            key={label}
+                            className="flex min-h-45 min-w-0 flex-col justify-between rounded-xl border border-[#ffffff1a] bg-[linear-gradient(145deg,#020202_25%,#080808_55%,#1a1a1a)] p-4.5 shadow-[0_16px_40px_#0004] md:min-h-53 md:rounded-[14px] md:p-5 lg:min-h-63 lg:p-6"
+                        >
+                            <Icon
+                                aria-hidden="true"
+                                className="size-5 shrink-0 stroke-[1.6px] md:size-6"
+                            />
+                            <div>
+                                <p className="text-[40px] leading-[1.2] font-medium tracking-[-2px] md:text-[44px] lg:text-[56px]">
+                                    {value}
+                                </p>
+                                <p className="mt-2 text-[13px] leading-5 text-[#e0e0e0] md:mt-3 md:text-sm md:leading-6 lg:text-base">
+                                    {label}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </main>
+    );
 };
 
 export default Hero;

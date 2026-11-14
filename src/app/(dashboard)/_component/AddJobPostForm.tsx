@@ -1,9 +1,10 @@
 'use client';
 import { getJobPost } from '@/lib/actions/jobs';
 import { FiArrowRight, FiChevronDown, FiGlobe, FiMapPin } from 'react-icons/fi';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { TbCurrencyEuro } from 'react-icons/tb';
-import toast from 'react-hot-toast';
 
 const inputClass =
     'h-11 w-full min-w-0 max-w-full rounded-lg border border-white/5 bg-[#202023] px-3 text-base text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/10 sm:text-sm';
@@ -11,6 +12,7 @@ const labelClass = 'mb-2 block text-sm font-medium text-zinc-200';
 const sectionClass = 'min-w-0 rounded-xl border border-white/[0.025] bg-[#151516] p-4 sm:p-6';
 
 const AddJobPostForm = () => {
+    const router = useRouter();
     const handleSubmitFrom = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -21,9 +23,12 @@ const AddJobPostForm = () => {
         try {
             const result = await getJobPost(data);
 
-            if (result.acknowledged && result.insertedId) {
+            if (result.insertedId) {
                 form.reset();
                 toast.success('Job posted successfully!');
+                setTimeout(() => {
+                    router.push('/dashboard/recruiter/manage-jobs');
+                }, 1500);
             } else {
                 toast.error('Job post failed. Please try again.');
             }
@@ -39,7 +44,10 @@ const AddJobPostForm = () => {
                         id="basic-information"
                         className="mb-5 flex items-center gap-2 text-sm font-medium"
                     >
-                        <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-violet-500" />
+                        <span
+                            aria-hidden="true"
+                            className="size-1.5 shrink-0 rounded-full bg-violet-500"
+                        />
                         1. Basic Information
                     </h2>
 
@@ -135,7 +143,10 @@ const AddJobPostForm = () => {
                         id="location-compensation"
                         className="mb-5 flex items-center gap-2 text-sm font-medium"
                     >
-                        <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-violet-500" />
+                        <span
+                            aria-hidden="true"
+                            className="size-1.5 shrink-0 rounded-full bg-violet-500"
+                        />
                         2. Location, Compensation &amp; Timeline
                     </h2>
 
@@ -275,7 +286,10 @@ const AddJobPostForm = () => {
                         id="responsibilities-requirements"
                         className="mb-5 flex items-center gap-2 text-sm font-medium"
                     >
-                        <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-violet-500" />
+                        <span
+                            aria-hidden="true"
+                            className="size-1.5 shrink-0 rounded-full bg-violet-500"
+                        />
                         3. Responsibilities &amp; Requirements
                     </h2>
 

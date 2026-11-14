@@ -16,3 +16,14 @@ export const deleteJob = async (jobId: string) => {
     });
     return res.json();
 };
+
+export const updateJob = async (jobId: string, data: Record<string, FormDataEntryValue>) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jobs/${jobId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    return res.json();
+};

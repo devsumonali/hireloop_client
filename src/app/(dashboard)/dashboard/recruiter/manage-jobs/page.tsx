@@ -1,4 +1,5 @@
 import DeleteBtn from '@/app/(dashboard)/_component/shared/DeleteBtn';
+import UpdateJobs from '@/app/(dashboard)/_component/shared/UpdateJobs';
 import { getJobPostList } from '@/lib/api/jobs';
 import type { IjobPost } from '@/types/jobs';
 import { connection } from 'next/server';
@@ -8,7 +9,6 @@ import {
     FiChevronRight,
     FiCode,
     FiCpu,
-    FiEdit2,
     FiGlobe,
     FiMapPin,
     FiMoreVertical,
@@ -247,17 +247,7 @@ const ManageJobPage = async () => {
                                             </td>
                                             <td className="px-4 py-5">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <button
-                                                        type="button"
-                                                        aria-label={`Update ${job.title}`}
-                                                        className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-violet-400/15 bg-violet-500/15 px-2.5 text-sm text-violet-200 transition hover:bg-violet-500/25 focus-visible:outline-2 focus-visible:outline-violet-400"
-                                                    >
-                                                        <FiEdit2
-                                                            aria-hidden="true"
-                                                            className="size-4"
-                                                        />
-                                                        Update
-                                                    </button>
+                                                    <UpdateJobs job={job} />
                                                     <DeleteBtn job={job} />
                                                     <button
                                                         type="button"
