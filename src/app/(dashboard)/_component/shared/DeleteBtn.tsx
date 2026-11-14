@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FiTrash2, FiX } from 'react-icons/fi';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 const DeleteBtn = ({ job }: { job: IjobPost }) => {
     const router = useRouter();
@@ -36,13 +36,14 @@ const DeleteBtn = ({ job }: { job: IjobPost }) => {
 
     const handleDelete = async () => {
         const res = await deleteJob(job._id);
-        if (res.acknowledged) {
+        if (res.acknowledged && res.deletedCount) {
             router.refresh();
             toast.success(job.title + ' Deleted successfully');
         } else {
             toast.error(job.title + ' Deleted failed');
         }
         setOpen(false);
+        console.log(res);
     };
 
     return (

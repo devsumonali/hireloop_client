@@ -3,7 +3,7 @@ import { getJobPost } from '@/lib/actions/jobs';
 import { FiArrowRight, FiChevronDown, FiGlobe, FiMapPin } from 'react-icons/fi';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import { TbCurrencyEuro } from 'react-icons/tb';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 const inputClass =
     'h-11 w-full min-w-0 max-w-full rounded-lg border border-white/5 bg-[#202023] px-3 text-base text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/10 sm:text-sm';

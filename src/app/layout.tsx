@@ -4,7 +4,6 @@ import './globals.css';
 import Navbar from '@/components/shared/Navbar';
 import Footer from '@/components/shared/Footer';
 import { Toaster } from 'react-hot-toast';
-import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -19,7 +18,6 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                 {children}
                 <Toaster position="top-center" />
                 <Footer />
-                <ToastContainer position="top-center" />
             </body>
         </html>
     );
