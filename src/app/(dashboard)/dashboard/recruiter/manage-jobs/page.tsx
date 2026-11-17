@@ -1,9 +1,9 @@
 import DeleteBtn from '@/app/(dashboard)/_component/shared/DeleteBtn';
 import UpdateJobs from '@/app/(dashboard)/_component/shared/UpdateJobs';
 import { getJobPostList } from '@/lib/api/jobs';
-import type { IjobPost } from '@/types/jobs';
+import type { IjobPost, JobCategoryStyle } from '@/types/jobs';
+import Link from 'next/link';
 import { connection } from 'next/server';
-import type { IconType } from 'react-icons';
 import {
     FiBriefcase,
     FiChevronRight,
@@ -25,7 +25,7 @@ const salaryUnits: Record<string, string> = {
     yearly: 'yr',
 };
 
-const categoryStyles: Record<string, { icon: IconType; color: string }> = {
+const categoryStyles: Record<string, JobCategoryStyle> = {
     engineering: { icon: FiCode, color: 'text-violet-400' },
     design: { icon: FiPenTool, color: 'text-orange-400' },
     infrastructure: { icon: FiCpu, color: 'text-cyan-400' },
@@ -66,7 +66,7 @@ const ManageJobPage = async () => {
 
     return (
         <div className="-m-4 min-h-dvh bg-[#111112] px-4 py-8 text-sm text-zinc-100 sm:-m-6 sm:px-6 sm:py-10 lg:-m-8 lg:px-8 lg:py-12">
-            <div className="mx-auto min-w-0 max-w-7xl">
+            <div className="mx-auto min-w-0 max-w-7.2xl">
                 <header className="mb-7">
                     <p className="mb-3 flex flex-wrap items-center gap-1.5 text-sm text-zinc-400">
                         Manage Jobs
@@ -83,13 +83,13 @@ const ManageJobPage = async () => {
                                 across your organization.
                             </p>
                         </div>
-                        <button
-                            type="button"
+                        <Link
+                            href={'/dashboard/recruiter/add-job'}
                             className="inline-flex h-11 w-full shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-[#6251ff] px-4 text-sm font-medium text-white shadow-[0_4px_16px_rgba(98,81,255,0.15)] transition hover:bg-violet-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-400 sm:w-auto"
                         >
                             <FiPlus aria-hidden="true" className="size-5" />
                             New Job Post
-                        </button>
+                        </Link>
                     </div>
                 </header>
 
@@ -135,8 +135,7 @@ const ManageJobPage = async () => {
                                         color: 'text-sky-400',
                                     };
                                     const JobIcon = categoryStyle.icon;
-                                    const isRemote =
-                                        job.isRemote === 'on' || job.isRemote === 'true';
+                                    const isRemote = job.isRemote;
                                     const LocationIcon = isRemote ? FiGlobe : FiMapPin;
                                     const salaryUnit =
                                         salaryUnits[job.salaryFrequency] || job.salaryFrequency;

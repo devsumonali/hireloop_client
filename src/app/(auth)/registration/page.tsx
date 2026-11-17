@@ -1,5 +1,7 @@
 'use client';
 
+import type { RegistrationRole } from '@/types/auth';
+
 import { signUp } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
@@ -17,7 +19,7 @@ const RegistrationPage = () => {
           const password = formData.get('password') as string;
           const confirmPassword = formData.get('confirmPassword') as string;
           const phone = formData.get('phone') as string;
-          const role = formData.get('role') as 'seeker' | 'recruiter';
+          const role = formData.get('role') as RegistrationRole;
 
           if (password !== confirmPassword) {
                toast.error('Passwords do not match');

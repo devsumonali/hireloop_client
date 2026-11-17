@@ -1,6 +1,6 @@
 'use client';
 import { updateJob } from '@/lib/actions/jobs';
-import { IjobPost } from '@/types/jobs';
+import type { JobFormData, JobProps } from '@/types/jobs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -13,7 +13,7 @@ const inputClass =
 const labelClass = 'mb-2 block text-sm font-medium text-zinc-200';
 const sectionClass = 'min-w-0 rounded-xl border border-white/[0.025] bg-[#151516] p-4 sm:p-6';
 
-const UpdateJobs = ({ job }: { job: IjobPost }) => {
+const UpdateJobs = ({ job }: JobProps) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -36,7 +36,10 @@ const UpdateJobs = ({ job }: { job: IjobPost }) => {
         e.preventDefault();
         const form = e.currentTarget;
         const formData = new FormData(form);
-        const updatedJob = Object.fromEntries(formData.entries());
+        const updatedJob: JobFormData = {
+            ...Object.fromEntries(formData.entries()),
+            isRemote: formData.has('isRemote'),
+        };
 
         const updateResponse = await updateJob(job._id, updatedJob);
 
@@ -235,9 +238,7 @@ const UpdateJobs = ({ job }: { job: IjobPost }) => {
                                         role="switch"
                                         name="isRemote"
                                         aria-label="Allow remote work"
-                                        defaultChecked={
-                                            job.isRemote === 'on' || job.isRemote === 'true'
-                                        }
+                                        defaultChecked={job.isRemote}
                                         className="peer sr-only"
                                     />
                                     <span

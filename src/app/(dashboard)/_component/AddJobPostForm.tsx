@@ -1,5 +1,6 @@
 'use client';
 import { getJobPost } from '@/lib/actions/jobs';
+import type { JobFormData } from '@/types/jobs';
 import { FiArrowRight, FiChevronDown, FiGlobe, FiMapPin } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -17,7 +18,10 @@ const AddJobPostForm = () => {
         e.preventDefault();
         const form = e.currentTarget;
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+        const data: JobFormData = {
+            ...Object.fromEntries(formData.entries()),
+            isRemote: formData.has('isRemote'),
+        };
 
         //job post api call
         try {

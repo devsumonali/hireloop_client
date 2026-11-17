@@ -1,5 +1,7 @@
+import type { JobFormData } from '@/types/jobs';
+
 //new job post api call
-export const getJobPost = async (data: Record<string, FormDataEntryValue>) => {
+export const getJobPost = async (data: JobFormData) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jobs`, {
         method: 'POST',
         headers: {
@@ -17,7 +19,7 @@ export const deleteJob = async (jobId: string) => {
     return res.json();
 };
 
-export const updateJob = async (jobId: string, data: Record<string, FormDataEntryValue>) => {
+export const updateJob = async (jobId: string, data: JobFormData) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jobs/${jobId}`, {
         method: 'PATCH',
         headers: {

@@ -1,6 +1,7 @@
 import DashboardSidebar from '@/app/(dashboard)/_component/DashboardSidebar';
+import type { ChildrenProps } from '@/types/common';
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: ChildrenProps) => {
     return (
         <div className="flex min-h-dvh min-w-0 flex-1 flex-col bg-slate-50 text-slate-900 lg:flex-row">
             <DashboardSidebar />

@@ -1,14 +1,14 @@
 'use client';
 
 import { deleteJob } from '@/lib/actions/jobs';
-import { IjobPost } from '@/types/jobs';
+import type { JobProps } from '@/types/jobs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FiTrash2, FiX } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
-const DeleteBtn = ({ job }: { job: IjobPost }) => {
+const DeleteBtn = ({ job }: JobProps) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const titleId = useId();
