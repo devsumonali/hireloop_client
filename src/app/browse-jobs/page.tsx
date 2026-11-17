@@ -1,95 +1,108 @@
-import { JobFilters, JobSort } from '@/components/jobs/BrowseJobsControls';
 import JobCard from '@/components/jobs/JobCard';
-import JobPagination from '@/components/jobs/JobPagination';
+import JobFilters from '@/components/jobs/JobFilters';
 import { getJobPostList } from '@/lib/api/jobs';
-import { getBrowseJobsFilters, getJobFilterOptions, getJobsApiQuery, JOBS_PER_PAGE, sortJobs } from '@/lib/jobs';
 import type { BrowseJobsPageProps } from '@/types/jobs';
-import type { Metadata } from 'next';
-import Form from 'next/form';
 import Link from 'next/link';
 import { FiSearch } from 'react-icons/fi';
 
-export const metadata: Metadata = {
+export const metadata = {
     title: 'Browse Jobs | HireLoop',
-    description: 'Find your next role. Browse jobs by title, job type, category, and work location.',
+    description: 'Find your next role by job title, type, category, and work location.',
 };
 
 export default async function BrowseJobs({ searchParams }: BrowseJobsPageProps) {
-    const filters = getBrowseJobsFilters(await searchParams);
-    const query = getJobsApiQuery(filters);
-    const jobsRequest = getJobPostList(query);
-    const [jobs, allJobs] = await Promise.all([
-        jobsRequest,
-        query ? getJobPostList() : jobsRequest,
-    ]);
-    const options = getJobFilterOptions(allJobs);
-    const sortedJobs = sortJobs(jobs, filters.sort);
-    const totalPages = Math.max(1, Math.ceil(jobs.length / JOBS_PER_PAGE));
-    filters.page = Math.min(filters.page, totalPages);
-    const firstResult = (filters.page - 1) * JOBS_PER_PAGE;
-    const visibleJobs = sortedJobs.slice(firstResult, firstResult + JOBS_PER_PAGE);
+    const params = await searchParams;
+
+    // Read the search and filter values from the URL.
+    const search = typeof params.search === 'string' ? params.search : '';
+    const jobType = typeof params.jobType === 'string' ? params.jobType : '';
+    const isRemote = params.isRemote === 'true' || params.isRemote === 'false' ? params.isRemote : '';
+    const category = typeof params.category === 'string' ? params.category : '';
+    const sort = params.sort === 'salary' || params.sort === 'deadline' ? params.sort : 'recent';
+
+    const query = new URLSearchParams();
+    if (search) query.set('search', search);
+    if (jobType) query.set('jobType', jobType);
+    if (isRemote) query.set('isRemote', isRemote);
+    if (category) query.set('category', category);
+
+    const allJobs = await getJobPostList();
+    const jobs = query.size ? await getJobPostList(query.toString()) : allJobs;
+
+    const jobTypes = ['Full-time', 'Part-time', 'Contract', 'Internship', 'Freelance'].map((type) => ({
+        label: type,
+        value: type,
+        count: allJobs.filter((job) => job.jobType === type).length,
+    }));
+    const categories = [...new Set(allJobs.map((job) => job.category).filter(Boolean))];
+
+    // Sort all matching jobs.
+    const salaryMultiplier: Record<string, number> = { hourly: 2080, monthly: 12, yearly: 1 };
+    const sortedJobs = [...jobs].sort((a, b) => {
+        if (sort === 'salary') {
+            const salaryA = Number(a.maxSalary || a.minSalary || 0) * (salaryMultiplier[a.salaryFrequency] || 1);
+            const salaryB = Number(b.maxSalary || b.minSalary || 0) * (salaryMultiplier[b.salaryFrequency] || 1);
+            return salaryB - salaryA;
+        }
+        if (sort === 'deadline') {
+            const dateA = new Date(a.deadline).getTime() || Infinity;
+            const dateB = new Date(b.deadline).getTime() || Infinity;
+            return dateA - dateB;
+        }
+        return (new Date(b.createdAt || '').getTime() || 0) - (new Date(a.createdAt || '').getTime() || 0);
+    });
 
     return (
-        <main className="flex-1 bg-[#09090b] pb-6 text-white font-[Arial,Helvetica,sans-serif] lg:pb-10">
+        <main className="flex-1 bg-[#09090b] pb-8 text-white font-[Arial,Helvetica,sans-serif]">
             <div className="mx-auto w-[calc(100%-2rem)] max-w-6xl pt-5 sm:w-[90%] lg:pt-7">
-                <Form
-                    action="/browse-jobs"
-                    aria-label="Search jobs"
-                    className="flex flex-col gap-3 rounded-[10px] border border-[#29292e] bg-[#131316] p-3.5 sm:flex-row lg:gap-5 lg:p-5"
-                >
-                    {filters.jobType && <input type="hidden" name="jobType" value={filters.jobType} />}
-                    {filters.isRemote && <input type="hidden" name="isRemote" value={filters.isRemote} />}
-                    {filters.category && <input type="hidden" name="category" value={filters.category} />}
-                    {filters.sort !== 'recent' && <input type="hidden" name="sort" value={filters.sort} />}
+                <form action="/browse-jobs" method="get" className="flex flex-col gap-3 rounded-[10px] border border-[#29292e] bg-[#131316] p-3.5 sm:flex-row lg:p-5">
+                    <input type="hidden" name="jobType" value={jobType} />
+                    <input type="hidden" name="isRemote" value={isRemote} />
+                    <input type="hidden" name="category" value={category} />
+                    <input type="hidden" name="sort" value={sort} />
                     <div className="relative flex min-w-0 flex-1 items-center">
-                        <FiSearch aria-hidden="true" className="pointer-events-none absolute left-3 size-4 stroke-[1.5px] text-[#b5b5be] lg:left-4 lg:size-5" />
-                        <label htmlFor="job-search" className="sr-only">Search by job title or keywords</label>
-                        <input
-                            key={filters.search}
-                            id="job-search"
-                            name="search"
-                            type="search"
-                            defaultValue={filters.search}
-                            placeholder="Search by job title, keywords..."
-                            className="h-11 w-full min-w-0 rounded-md border border-[#303035] bg-[#1a1a1e] pr-3 pl-9 text-xs text-white outline-none placeholder:text-[#a1a1ac] focus-visible:border-[#a1a1ac] sm:h-9 sm:text-[10px] lg:h-12 lg:pl-11 lg:text-sm"
-                        />
+                        <FiSearch aria-hidden="true" className="absolute left-3 size-4 text-[#b5b5be]" />
+                        <label htmlFor="job-search" className="sr-only">Search jobs</label>
+                        <input key={search} id="job-search" name="search" type="search" defaultValue={search} placeholder="Search by job title, keywords..." className="h-11 w-full rounded-md border border-[#303035] bg-[#1a1a1e] pr-3 pl-9 text-xs text-white placeholder:text-[#a1a1ac]" />
                     </div>
-                    <button type="submit" className="h-11 shrink-0 cursor-pointer rounded-md border border-white bg-white px-5 text-xs font-medium text-black transition hover:bg-[#e3e3e8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:h-9 sm:text-[10px] lg:h-12 lg:px-6 lg:text-sm">
-                        Search Jobs
-                    </button>
-                </Form>
+                    <button type="submit" className="h-11 cursor-pointer rounded-md bg-white px-5 text-xs font-medium text-black hover:bg-[#e3e3e8]">Search Jobs</button>
+                </form>
 
-                <div className="mt-4 grid items-start gap-5 md:grid-cols-[minmax(0,0.31fr)_minmax(0,1fr)] lg:mt-5 lg:gap-7">
-                    <JobFilters filters={filters} {...options} />
-                    <section aria-labelledby="job-results-heading" className="min-w-0">
-                        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 sm:mb-3.5 lg:mb-5">
-                            <h1 id="job-results-heading" className="text-base leading-6 font-medium tracking-[-0.3px] sm:text-sm lg:text-xl lg:leading-7">
-                                Found {jobs.length.toLocaleString('en-US')} Professional {jobs.length === 1 ? 'Job' : 'Jobs'}
+                <div className="mt-5 grid items-start gap-5 md:grid-cols-[minmax(0,0.31fr)_minmax(0,1fr)] lg:gap-7">
+                    <JobFilters jobType={jobType} isRemote={isRemote} category={category} jobTypes={jobTypes} categories={categories} />
+
+                    <section className="min-w-0" aria-labelledby="results-heading">
+                        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                            <h1 id="results-heading" className="text-base font-medium lg:text-xl">
+                                Found {jobs.length} Professional {jobs.length === 1 ? 'Job' : 'Jobs'}
                             </h1>
-                            <JobSort filters={filters} />
+                            <form action="/browse-jobs" method="get" className="flex items-center gap-2 text-xs">
+                                <input type="hidden" name="search" value={search} />
+                                <input type="hidden" name="jobType" value={jobType} />
+                                <input type="hidden" name="isRemote" value={isRemote} />
+                                <input type="hidden" name="category" value={category} />
+                                <label htmlFor="job-sort" className="text-[#858590]">Sort by:</label>
+                                <select key={sort} id="job-sort" name="sort" defaultValue={sort} className="rounded-md border border-[#29292e] bg-[#131316] p-2 text-xs">
+                                    <option value="recent">Most Recent</option>
+                                    <option value="salary">Highest Salary</option>
+                                    <option value="deadline">Application Deadline</option>
+                                </select>
+                                <button type="submit" className="cursor-pointer rounded-md border border-[#333338] px-3 py-2 hover:bg-white/5">Sort</button>
+                            </form>
                         </div>
-                        {visibleJobs.length ? (
-                            <>
-                                <div className="space-y-2 lg:space-y-3">
-                                    {visibleJobs.map((job) => <JobCard key={job._id} job={job} />)}
-                                </div>
-                                <p className="mt-4 text-center text-[10px] text-[#858590] lg:text-xs">
-                                    Showing {firstResult + 1}–{firstResult + visibleJobs.length} of {jobs.length} jobs
-                                </p>
-                                <JobPagination filters={filters} totalPages={totalPages} />
-                            </>
+
+                        {sortedJobs.length ? (
+                            <div className="space-y-3">
+                                {sortedJobs.map((job) => <JobCard key={job._id} job={job} />)}
+                            </div>
                         ) : (
-                            <div className="flex min-h-64 flex-col items-center justify-center rounded-[10px] border border-[#29292e] bg-[#131316] px-6 py-12 text-center">
-                                <FiSearch aria-hidden="true" className="mb-4 size-7 text-[#858590]" />
+                            <div className="rounded-[10px] border border-[#29292e] bg-[#131316] p-10 text-center">
                                 <h2 className="text-lg font-medium">No jobs found</h2>
-                                <p className="mt-2 max-w-sm text-sm leading-6 text-[#94949f]">
-                                    Try another keyword or clear your filters to see more opportunities.
-                                </p>
-                                <Link href="/browse-jobs" className="mt-5 rounded-md border border-[#414148] px-4 py-2 text-sm transition hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white">
-                                    View all jobs
-                                </Link>
+                                <p className="mt-2 text-sm text-[#94949f]">Try a different search or clear your filters.</p>
+                                <Link href="/browse-jobs" className="mt-4 inline-block text-sm text-[#a99cff]">View all jobs</Link>
                             </div>
                         )}
+
                     </section>
                 </div>
             </div>

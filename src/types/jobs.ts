@@ -15,6 +15,15 @@ export interface IjobPost {
     salaryFrequency: string;
     responsibilities: string;
     requirements: string;
+    description?: string;
+    experience?: string;
+    skills?: string[];
+    benefits?: string[];
+    companySize?: string;
+    industry?: string;
+    website?: string;
+    companyImage?: string;
+    isVerifiedEmployer?: boolean;
     createdAt?: string;
     status?: 'active' | 'closed';
     applicantsCount?: number;
@@ -28,6 +37,10 @@ export interface JobProps {
     job: IjobPost;
 }
 
+export interface JobDetailsPageProps {
+    params: Promise<{ id: string }>;
+}
+
 export interface JobCategoryStyle {
     icon: IconType;
     color: string;
@@ -36,21 +49,12 @@ export interface JobCategoryStyle {
 export type JobFormData = Record<string, FormDataEntryValue | boolean> &
     Pick<IjobPost, 'isRemote'>;
 
-export type JobSort = 'recent' | 'salary' | 'deadline';
-
-export interface BrowseJobsFilters {
-    search: string;
-    jobType: string;
-    isRemote: '' | 'true' | 'false';
-    category: string;
-    sort: JobSort;
-    page: number;
-}
-
 export interface JobFiltersProps {
-    filters: BrowseJobsFilters;
+    jobType: string;
+    isRemote: string;
+    category: string;
     jobTypes: JobFilterOption[];
-    categories: JobFilterOption[];
+    categories: string[];
 }
 
 export interface JobFilterOption {
@@ -58,14 +62,3 @@ export interface JobFilterOption {
     value: string;
     count: number;
 }
-
-export interface JobSortProps {
-    filters: BrowseJobsFilters;
-}
-
-export interface JobPaginationProps {
-    filters: BrowseJobsFilters;
-    totalPages: number;
-}
-
-export type SaveJobButtonProps = Pick<IjobPost, '_id' | 'title' | 'company'>;

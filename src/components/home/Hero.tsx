@@ -19,7 +19,7 @@ const stats = [
 const Hero = () => {
     return (
         <main className="relative isolate flex-1 overflow-hidden bg-black text-white font-[Arial,Helvetica,sans-serif] before:pointer-events-none before:absolute before:inset-0 before:-z-1 before:bg-[radial-gradient(ellipse_100%_540px_at_50%_0,#292929,transparent_85%)] before:content-['']">
-            <section className="relative z-1 mx-auto max-w-330 px-4 pt-48 text-center md:px-6 md:pt-52 lg:pt-69">
+            <section className="relative z-1 mx-auto max-w-330 px-4 pt-20 text-center md:px-6 md:pt-28 lg:pt-45">
                 <div className="flex items-center justify-center before:hidden before:h-px before:w-16 before:bg-[linear-gradient(90deg,transparent,#fff2)] before:content-[''] after:hidden after:h-px after:w-16 after:rotate-180 after:bg-[linear-gradient(90deg,transparent,#fff2)] after:content-[''] md:before:block md:after:block">
                     <div className="inline-flex min-h-9 max-w-full items-center justify-center gap-2 rounded-full border border-[#ffffff26] bg-[linear-gradient(#1b1b1b,#080808)] px-3 py-2 text-[11px] leading-4.5 tracking-normal text-[#999] shadow-[inset_0_1px_#ffffff0d,0_8px_24px_#0006] font-['Courier_New',monospace] md:min-h-11 md:gap-3 md:px-5.5 md:py-2.5 md:text-lg md:leading-5.5 md:tracking-[0.5px]">
                         <FiBriefcase
