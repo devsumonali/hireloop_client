@@ -20,17 +20,6 @@ export interface IjobPost {
     applicantsCount?: number;
 }
 
-export type JobCardProps = {
-    title: string;
-    company: string;
-    location: string;
-    salary: string;
-    type: string;
-    logo: IconType;
-    logoColor: string;
-    badge?: 'Easy Apply' | 'Hot Job';
-};
-
 export interface BrowseJobsPageProps {
     searchParams: Promise<SearchParams>;
 }
@@ -46,3 +35,37 @@ export interface JobCategoryStyle {
 
 export type JobFormData = Record<string, FormDataEntryValue | boolean> &
     Pick<IjobPost, 'isRemote'>;
+
+export type JobSort = 'recent' | 'salary' | 'deadline';
+
+export interface BrowseJobsFilters {
+    search: string;
+    jobType: string;
+    isRemote: '' | 'true' | 'false';
+    category: string;
+    sort: JobSort;
+    page: number;
+}
+
+export interface JobFiltersProps {
+    filters: BrowseJobsFilters;
+    jobTypes: JobFilterOption[];
+    categories: JobFilterOption[];
+}
+
+export interface JobFilterOption {
+    label: string;
+    value: string;
+    count: number;
+}
+
+export interface JobSortProps {
+    filters: BrowseJobsFilters;
+}
+
+export interface JobPaginationProps {
+    filters: BrowseJobsFilters;
+    totalPages: number;
+}
+
+export type SaveJobButtonProps = Pick<IjobPost, '_id' | 'title' | 'company'>;

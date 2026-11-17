@@ -237,6 +237,7 @@ const UpdateJobs = ({ job }: JobProps) => {
                                         type="checkbox"
                                         role="switch"
                                         name="isRemote"
+                                        value="true"
                                         aria-label="Allow remote work"
                                         defaultChecked={job.isRemote}
                                         className="peer sr-only"

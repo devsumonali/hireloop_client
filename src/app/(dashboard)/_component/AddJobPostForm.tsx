@@ -172,6 +172,7 @@ const AddJobPostForm = () => {
                                 type="checkbox"
                                 role="switch"
                                 name="isRemote"
+                                value="true"
                                 aria-label="Allow remote work"
                                 defaultChecked
                                 className="peer sr-only"
